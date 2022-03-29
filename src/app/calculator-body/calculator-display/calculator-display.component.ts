@@ -3,26 +3,39 @@ import { Component, HostListener, Input, OnInit } from '@angular/core';
 @Component({
   selector: 'app-calculator-display',
   templateUrl: './calculator-display.component.html',
-  styleUrls: ['./calculator-display.component.css'],
 })
 export class CalculatorDisplayComponent implements OnInit {
-  @Input() displayText!: string;
-  // @Input() onBack!: any;
-  // typedValue: string = '';
+  @Input() displayText!: any;
+  @Input() onBack!: any;
+  operationIsDone = false;
 
   constructor() {}
-  // @HostListener('window:keypress', ['$event']) keyPressEvent(event: any) {
-  //   console.log(event.key);
-  //   this.displayText += event.key;
-  // }
-
-  sendTypedVal(event: any) {
-    console.log(event.target.value);
+  @HostListener('window:keypress', ['$event']) keyPressEvent(event: any) {
+    console.log(event.key);
+    console.log(event);
+    if (event.code === 'Space') {
+      if (this.operationIsDone) this.displayText = '';
+      this.displayText = this.displayText.substring(
+        0,
+        this.displayText.length - 1
+      );
+    } else if (event.code === 'Enter') {
+      this.operationIsDone = true;
+      this.displayText = eval(this.displayText);
+    } else {
+      if (this.operationIsDone) this.operationIsDone = false;
+      this.displayText += event.key;
+    }
   }
-
-  // pressBack() {
-  //   this.onBack();
-  // }
 
   ngOnInit(): void {}
 }
+//============================================
+// sendTypedVal(event: any) {
+//   console.log(event.target.value);
+// }
+
+// pressBack() {
+//   console.log('pressBack ran!');
+//   this.onBack();
+// }
