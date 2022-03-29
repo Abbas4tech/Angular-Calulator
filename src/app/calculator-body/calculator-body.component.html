@@ -1,16 +1,26 @@
-<app-calculator-display [displayText]="displayText"></app-calculator-display>
-<section class="w-[90%] max-w-2xl mx-auto">
-  <section class="grid grid-cols-4 grid-rows-4 gap-4">
-    <app-calculator-button
-      *ngFor="let button of buttonsArray"
-      [properiesOfButton]="button"
-      (buttonClicked)="showButton($event)"
-    ></app-calculator-button>
+<app-card>
+  <app-calculator-display [displayText]="displayText"></app-calculator-display>
+  <section>
+    <section class="grid grid-cols-4 grid-rows-4 gap-4">
+      <app-calculator-button
+        *ngFor="let button of buttonsArray"
+        [properiesOfButton]="button"
+        (buttonClicked)="showButton($event)"
+      ></app-calculator-button>
+    </section>
+    <section class="mt-4">
+      <app-calculator-button
+        [properiesOfButton]="{ value: 'Backspace' }"
+        (buttonClicked)="backSpace()"
+      ></app-calculator-button>
+
+      <section class="mt-4">
+        <app-calculator-button
+          [properiesOfButton]="{ value: '=' }"
+          (buttonClicked)="calculateResult()"
+        ></app-calculator-button> 
+      </section>
+    </section>
   </section>
-  <section class="mt-4">
-    <app-calculator-button
-      [properiesOfButton]="{ value: '=' }"
-      (buttonClicked)="calculateResult()"
-    ></app-calculator-button>
-  </section>
-</section>
+</app-card>
+<!-- [onBack]="backSpace()" -->

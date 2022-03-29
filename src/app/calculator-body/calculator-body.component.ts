@@ -12,17 +12,24 @@ export class CalculatorBodyComponent implements OnInit {
 
   displayText: string = '';
 
+  operationDone: boolean = false;
+
   constructor() {}
 
   showButton(evntObj: any) {
+    if (this.operationDone) this.operationDone = false;
     evntObj.value === 'C'
       ? (this.displayText = '')
       : (this.displayText += evntObj.value);
   }
+
   calculateResult() {
-    this.displayText = eval(this.displayText);
+    this.displayText = eval(this.displayText).toFixed(2);
+    this.operationDone = true;
   }
+
   backSpace() {
+    if (this.operationDone) this.displayText = '';
     this.displayText = this.displayText.substring(
       0,
       this.displayText.length - 1
