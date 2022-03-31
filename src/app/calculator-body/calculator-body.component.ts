@@ -16,7 +16,10 @@ export class CalculatorBodyComponent implements OnInit {
   constructor() {}
 
   showButton(evntObj: any) {
-    if (this.operationDone) this.operationDone = false;
+    if (this.operationDone) {
+      this.operationDone = false;
+      this.displayText = '';
+    }
     evntObj.value === 'C'
       ? (this.displayText = '')
       : (this.displayText += evntObj.value);

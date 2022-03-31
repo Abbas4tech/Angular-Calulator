@@ -23,7 +23,10 @@ export class CalculatorDisplayComponent implements OnInit {
       this.operationIsDone = true;
       this.displayText = eval(this.displayText);
     } else {
-      if (this.operationIsDone) this.operationIsDone = false;
+      if (this.operationIsDone) {
+        this.operationIsDone = false;
+        this.displayText = '';
+      }
       this.displayText += event.key;
     }
   }
